@@ -22,7 +22,7 @@ export class CounterService {
     console.log(this.counter);
   }
 
-  subValue(value: number = 1) {
+  subValue(value: number) {
     this.counter = value ? (this.counter - value) : (this.counter - 1);
     console.log(this.counter);
   }
