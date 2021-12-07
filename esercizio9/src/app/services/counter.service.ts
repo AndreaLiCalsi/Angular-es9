@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CounterService {
 
-  private counter: number = 0;
+  private counterSubject = new BehaviorSubject<number>(0);
 
   constructor() { }
 
-  getValue() {
-    if (this.counter >= 0) {
-      return this.counter;
+  getCounter() {
+    if (this.counterSubject.getValue() >= 0) {
+      return this.counterSubject.getValue();
     }
     else
     return 'counter cannot be negative';
   }
 
   addValue(value: number) {
-    this.counter = value ? (this.counter + +value) : (this.counter + 1);
-    console.log(this.counter);
+    this.counterSubject.next(value ? (this.counterSubject.getValue() + +value) : (this.counterSubject.getValue() + 1));
   }
 
   subValue(value: number) {
-    this.counter = value ? (this.counter - value) : (this.counter - 1);
-    console.log(this.counter);
+    this.counterSubject.next(value ? (this.counterSubject.getValue() - value) : (this.counterSubject.getValue() - 1));
   }
 }
